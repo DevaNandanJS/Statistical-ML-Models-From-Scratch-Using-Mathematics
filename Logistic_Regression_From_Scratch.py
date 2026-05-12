@@ -56,3 +56,4 @@ def gradient_descent(x, y, w, b, alpha, iteration):
 
     for i in range(iteration):
         
+        
