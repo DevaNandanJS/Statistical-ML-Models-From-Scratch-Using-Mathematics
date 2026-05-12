@@ -8,7 +8,6 @@ print(data.head())
 print(data.shape)
 
 #plotting the data
-
 plt.scatter(data.Hours, data.Scores, color='blue')
 plt.title('Hours vs Scores')
 plt.xlabel('Hours Studied')
@@ -21,7 +20,7 @@ def loss_function(m, b, points):
     for i in range(len(points)):
         x= points.iloc[i].Hours
         y= points.iloc[i].Scores
-        total_erroe= total_error + (y - (m*x)+b )**2
+        total_error= total_error + (y - (m*x)+b )**2
     total_error / len(points)
     return total_error
 
@@ -41,7 +40,6 @@ def gradient_descent(m_now, b_now, points, L):
     
     m = m_now - L * m_gradient
     b = b_now - L * b_gradient
-
     return m, b
 
 #Exicution
