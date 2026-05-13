@@ -14,15 +14,16 @@ plt.xlabel('Hours Studied')
 plt.ylabel('Scores Obtained')
 plt.show()
 
-#Defining loss function, We dont use this and its just for learning and understanding purpose
+#Defining loss function
 def loss_function(m, b, points):
-    total_error= 0
-    for i in range(len(points)):
-        x= points.iloc[i].Hours
-        y= points.iloc[i].Scores
-        total_error= total_error + (y - (m*x)+b )**2
-    total_error / len(points)
-    return total_error
+    total_error = 0
+    n = len(points)
+    for i in range(n):
+        x = points.iloc[i].Hours
+        y = points.iloc[i].Scores
+        # Corrected parentheses: (y - (mx + b))^2
+        total_error += (y - (m * x + b))**2
+    return total_error / n
 
 #Defining gradient descent function
 def gradient_descent(m_now, b_now, points, L):
@@ -34,9 +35,10 @@ def gradient_descent(m_now, b_now, points, L):
     for i in range(n):
         x= points.iloc[i].Hours
         y= points.iloc[i].Scores
-
-        m_gradient= m_gradient - (2/n) * (y- (m_now*x + b_now)) * x
-        b_gradient= b_gradient - (2/n) * (y- (m_now*x + b_now))
+        
+        # Partial derivatives of MSE: -2/n * sum(y - (mx + b)) * x
+        m_gradient += -(2/n) * (y - (m_now * x + b_now)) * x
+        b_gradient += -(2/n) * (y - (m_now * x + b_now))
     
     m = m_now - L * m_gradient
     b = b_now - L * b_gradient
